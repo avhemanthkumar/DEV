@@ -1,0 +1,53 @@
+public with sharing class getRecordDataController {
+    
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Trainee__c> getTraineesData() {
+        return [SELECT Id, Name FROM Trainee__c];
+    }
+    
+    
+    
+    @AuraEnabled   
+    
+    public static void createTraineelineItems(List<Trainee__c> selectedRecords, String recordId){
+        
+        system.debug('traineelst: '+selectedRecords);
+        system.debug('Opp ID: '+recordId);
+        Map<String,String> newMap = new Map<String,String>();
+        List<Trainee_Line_Item__c> tliToAdd = new List <Trainee_Line_Item__c> (); 
+        
+        for(Trainee__c T :selectedRecords){
+            
+            Trainee_Line_Item__c TL = new Trainee_Line_Item__c ();
+            TL.Tristar_Course__c = recordId ;
+            TL.Trainee__c = T.Id;
+            TL.Name = T.Name;
+            tliToAdd.add(TL);
+        }
+        insert tliToAdd;
+        
+        
+        
+    }
+    @AuraEnabled(cacheable=true)
+    public static list<Trainee__c> getTraineesList(string searchKey) {
+        string searchKeyword = '%' + searchKey + '%';
+		
+        
+        list<Trainee__c> traineesListRecord = new list<Trainee__c>();
+     
+	   
+        for(Trainee__c trnObj : [SELECT Id, Name FROM Trainee__c
+                            WHERE name LIKE : searchKeyword]){
+           traineesListRecord.add(trnObj);
+        }
+        
+         if(traineesListRecord.size() == 0){
+            throw new AuraHandledException('No Record Found..'); 
+         }
+         
+        return traineesListRecord;
+    }
+    
+}
