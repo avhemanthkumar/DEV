@@ -1,0 +1,10 @@
+<template>  
+        <lightning-card title="Trainees">  
+          <lightning-button slot="actions" label="Add" onclick={getSelectedRec}></lightning-button>  
+          <div class="slds-box">  
+            <lightning-datatable  
+            data={traineesList} columns={Columns} key-field="Id">  
+            </lightning-datatable>  
+          </div>  
+        </lightning-card>  
+      </template>
