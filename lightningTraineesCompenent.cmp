@@ -1,0 +1,38 @@
+<aura:component controller="lightningTraineesHandler" implements="flexipage:availableForAllPageTypes,force:appHostable,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="url" type="String" />
+    <aura:attribute name="OpportunityList" type="Tristar_Course_Line_item__c[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:card iconName="standard:work_capacity_usage" title="Courses Undertaken">
+        <aura:if isTrue="{!not(empty(v.OpportunityList))}">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="File Name">Name Of The Courses</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="File Name">Course Start Date</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.OpportunityList}" var="opp">
+                        <tr class="slds-hint-parent">
+                            <td data-label="File Name">
+                                <div class="slds-truncate" title="File Name"> <a target="_blank" href="{!v.url +'/'+ opp.Tristar_Course__r.Id}">{!opp.Tristar_Course__r.Name}</a></div>
+                            </td>
+                            <td data-label="File Name">
+                                <div class="slds-truncate" title="File Name">{!opp.Tristar_Course__r.Course_Start_Date__c}</div>  
+                            </td>
+                        </tr>
+                        
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <aura:set attribute="else">
+                <div Style="text-align : center"> " Instructor has not taken up any courses yet! "</div>
+            </aura:set>
+        </aura:if>
+    </lightning:card>
+</aura:component>
