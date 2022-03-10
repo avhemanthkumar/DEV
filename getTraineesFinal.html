@@ -1,0 +1,20 @@
+<template>
+<lightning-card title="Trainess">  
+  <lightning-button slot="actions" label="Add" onclick={addRecord}></lightning-button>
+  <div class="slds-box">
+    <div class="slds-col slds-size_6-of-12">    
+    <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search" value={searchKey}></lightning-input>
+    </div>
+    <div class="slds-box">  
+    <lightning-datatable  
+    data={traineesList} columns={Columns} key-field="Id">  
+    </lightning-datatable> 
+    </div> 
+  </div>
+  </lightning-card>
+
+  </template>
+  <!--<template for:each={traineesList} for:item="trainee" for:index="index">
+    
+      <option key={trainee.Id}>{trainee.Name}</option>
+    </template>-->
