@@ -1,61 +1,86 @@
 <template>
   
-<lightning-card title="Trainess">
+  <lightning-card title="Trainess">
+    
+    
   
+  <template if:false={showText}>
+       
+  <div class="slds-modal__footer">
+    <lightning-button slot="actions" label="Selected Trainees" onclick={handleClick}></lightning-button>
+      <div class="slds-col slds-size_6-of-12"> 
+    <lightning-input type="search" onchange={handleKeyChange} class="slds-m-top-small" label="Search" value={searchKey}></lightning-input>
   
-
-<template if:false={showText}>
-     
-<div class="slds-modal__footer">
-  <lightning-button slot="actions" label="Selected Trainees" onclick={handleClick}></lightning-button>
-    <div class="slds-col slds-size_6-of-12"> 
-  <lightning-input type="search" onchange={handleKeyChange} class="slds-m-top-small" label="Search" value={searchKey}></lightning-input>
-
-    </div>
-<div class="slds-box">  
-<lightning-datatable  
-data={traineesList} columns={Columns} key-field="Id" onrowselection={handleAccountClick}>  
-</lightning-datatable>
-
- </div>
-
-</div>
-
-
- 
-
- 
-</template>
-
-<template if:true={showText}>
-  <lightning-button slot="actions" label="Add" onclick={addRecord} ></lightning-button>
-  <div class="slds-box">
-    <lightning-datatable  
-data={searchData} columns={Columns} key-field="Id" hide-checkbox-column="True">  
-</lightning-datatable>
-
+      </div>
+  <div class="slds-box">  
+  <lightning-datatable  
+  data={traineesList} columns={Columns} key-field="Id" onrowselection={handleAccountClick}>  
+  </lightning-datatable>
   
-
+   </div>
+  
   </div>
-</template>
+  
+  
+   
+  
+   
+  </template>
+ 
+  
+  <template if:true={showText}>
+    <lightning-button slot="actions" label="Add" onclick={addRecord} ></lightning-button>
+    <div class="slds-box">
+      <lightning-button slot="actions" label="Previous" onclick={handlePrevious} ></lightning-button>
+      <lightning-datatable  
+  data={searchData} columns={Columns} key-field="Id" hide-checkbox-column="True">  
+  </lightning-datatable>
+  
+    
+  
+    </div>
+  </template>
 
-
-</lightning-card>
-
-
-</template>
-
-<!--<div class="slds-box">  
-<template for:each={traineesList} for:item="trainee" for:index="index">
-
-<tr key={trainee.Id} data-key={trainee.Id} class="slds-hint-parent">
-<td>
-<lightning-input type="checkbox" onclick={handleAccountClick} value="index"></lightning-input>
-
-</td>
-<td>{trainee.Name}</td>
-
-</tr>
-
-</template> 
-</div> -->
+  <template if:true={showPrevious}>
+       
+    <div class="slds-modal__footer">
+      <lightning-button slot="actions" label="Selected Trainees" onclick={handleClick}></lightning-button>
+        <div class="slds-col slds-size_6-of-12"> 
+      <lightning-input type="search" onchange={handleKeyChange} class="slds-m-top-small" label="Search" value={searchKey}></lightning-input>
+    
+        </div>
+    <div class="slds-box">  
+    <lightning-datatable  
+    data={traineesList} columns={Columns} key-field="Id" onrowselection={handleAccountClick}>  
+    </lightning-datatable>
+    
+     </div>
+    
+    </div>
+    
+    
+     
+    
+     
+    </template>
+  
+  
+  </lightning-card>
+  
+  
+  </template>
+  
+  <!--<div class="slds-box">  
+  <template for:each={traineesList} for:item="trainee" for:index="index">
+  
+  <tr key={trainee.Id} data-key={trainee.Id} class="slds-hint-parent">
+  <td>
+  <lightning-input type="checkbox" onclick={handleAccountClick} value="index"></lightning-input>
+  
+  </td>
+  <td>{trainee.Name}</td>
+  
+  </tr>
+  
+  </template> 
+  </div> -->
