@@ -22,6 +22,7 @@ traineesList = [];
 searchKey = '';
 data = [];
 showText = false;
+showPrevious=false;
 searchData;
 
  
@@ -52,6 +53,9 @@ handleClick(event){
         }) 
 
     
+}
+handlePrevious(event){
+this.showPrevious=true;
 }
 
 handleKeyChange(event) {
@@ -87,7 +91,7 @@ addRecord(){
     .then(()=>{ 
         this.template.querySelector('lightning-datatable').selectedAccId=[]; 
        const evt = new ShowToastEvent({
-           title:'Success Message',
+           title:'WoHoo!',
            message:'Trainess Added successfully! Refresh the Page.',
            variant:'Success',
            mode:'dismissable'
